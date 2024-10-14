@@ -631,7 +631,7 @@ public class Main {
 运行结果如下：
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/25360791/1680265498770-06d129ea-46e6-4a00-9de3-39d99e308515.png#averageHue=%23f9f8f7&clientId=ud95377f6-2eb9-4&from=paste&height=699&id=u610eab0d&name=image.png&originHeight=874&originWidth=1243&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=130011&status=done&style=none&taskId=u599905ec-8599-44d8-986f-fd61a3c175e&title=&width=994.4)
 可以看到，我们一开始设置人的名字为张三，年龄为`20`，然后我们通过`setAge`方法来修改`Person`的`Age`属性，把年龄改成`30`。
-但是这么写是有问题的，因为我们不可能总是在编译之前就已经确定好我们要具体改什么值了，我们更希望这个值可以动态变化，所以需要用到`Java`反射技术。我们可以修改上面的`Main.py`为如下内容：
+但是这么写是有问题的，因为我们不可能总是在编译之前就已经确定好我们要具体改什么值了，我们更希望这个值可以动态变化，所以需要用到`Java`反射技术。我们可以修改上面的`Main.java`为如下内容：
 ```java
 package org.example;
 
@@ -1008,7 +1008,7 @@ java -jar .\JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -A 127.0.0.1 -C "calc.ex
 ```
 选择下面的`JDK 1.8`的：
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/25360791/1680617239373-2a161464-b3a1-4d3f-8f8f-b4dc523ffe2a.png#averageHue=%231a1717&clientId=u8272b843-0f56-4&from=paste&height=268&id=u7e19c58f&name=image.png&originHeight=335&originWidth=1479&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=51934&status=done&style=none&taskId=u05bf2652-312e-4b63-b411-b1aa678099a&title=&width=1183.2)
-然后在`Main.py`中写入如下代码：
+然后在`Main.java`中写入如下代码：
 ```java
 package org.example;
 
