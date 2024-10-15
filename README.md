@@ -947,9 +947,9 @@ public class Main {
 可以看到，逻辑是这样的：先判断`_bytecodes`是否为空，如果不为空，则执行后续的代码；后续的代码中，会调用到自定义的`ClassLoader`去加载`_bytecodes`中的`byte[]`，并对类的父类进行判断，如果是`ABSTRACT_TRANSLET`也就是`com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet`，那么就把类成员属性的`_transletIndex`设置成当前循环中的标记位，第一次调用的话，就是`class[0]`。
 可以看到，这里的`_bytecodes`和`_outputProperties`都是类成员变量。同时，`_outputProperties`有自己的`getter`方法，也就是`getOutputProperties`。
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/25360791/1680594021516-01ba0d37-4b23-4fec-965c-2b1bc267f9a6.png#averageHue=%23fbf7f6&clientId=u8272b843-0f56-4&from=paste&height=694&id=u6e694cd4&name=image.png&originHeight=868&originWidth=857&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=79396&status=done&style=none&taskId=u140ff6c7-e7d4-4dfd-90b3-87f1b763daf&title=&width=685.6)
-**总结：说详细一点，**`**TemplatesImpl**`**利用链的整体思路如下：**
-**构造一个**`**TemplatesImpl**`**类的反序列化字符串，其中**`**_bytecodes**`**是我们构造的恶意类的类字节码，这个类的父类是**`**AbstractTranslet**`**，最终这个类会被加载并使用**`**newInstance()**`**实例化。在反序列化过程中，由于**`**getter**`**方法**`**getOutputProperties()**`**满足条件，将会被**`**fastjson**`**调用，而这个方法触发了整个漏洞利用流程：**`**getOutputProperties()**`** -> **`**newTransformer()**`** -> **`**getTransletInstance()**`** -> **`**defineTransletClasses()**`** / **`**EvilClass.newInstance()**`**。**
-**限制条件也很明显：需要代码中加了**`Feature.SupportNonPublicField`。
+总结：说详细一点，`TemplatesImpl`利用链的整体思路如下：
+构造一个`TemplatesImpl`类的反序列化字符串，其中`_bytecodes`是我们构造的恶意类的类字节码，这个类的父类是`AbstractTranslet`，最终这个类会被加载并使用`newInstance()`实例化。在反序列化过程中，由于`getter`方法`getOutputProperties()`满足条件，将会被`fastjson`调用，而这个方法触发了整个漏洞利用流程：`getOutputProperties()` -> `newTransformer()` -> `getTransletInstance()` -> `defineTransletClasses()` / `EvilClass.newInstance()`。
+限制条件也很明显：需要代码中加了`Feature.SupportNonPublicField`。
 ## 2. fastjson 1.2.25 反序列化漏洞（学习JdbcRowSetImpl链的相关知识）
 ### （1）黑白名单机制介绍
 众所周知，在`fastjson`自爆`1.2.24`版本的反序列化漏洞后，`1.2.25`版本就加入了黑白名单机制。
