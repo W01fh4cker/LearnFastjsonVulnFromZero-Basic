@@ -1211,7 +1211,7 @@ public class Main {
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/25360791/1680704636327-d3f73ea9-ba77-4dae-9497-adf85d3dca46.png#averageHue=%23f7f6f4&clientId=u8272b843-0f56-4&from=paste&height=814&id=u2def4e4a&name=image.png&originHeight=1017&originWidth=1920&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=218638&status=done&style=none&taskId=u0024ec07-8c87-4c38-b19f-5f9cb1d75a7&title=&width=1536)
 所以之前的两种`poc`可以直接自定义`uri`利用成功。
 ## 3. fastjson 1.2.42 反序列化漏洞
-首先先下载`fastjson 1.2.25`：
+首先先下载`fastjson 1.2.42`：
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
